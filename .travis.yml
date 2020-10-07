@@ -8,6 +8,11 @@ branches:
     - master # build master branch only
 script:
   - hexo generate
+comments:
+  valine:
+      appId: 'EDiQLCtfYJFYtECr3Adwmncl-gzGzoHsz'
+      appKey: 'MDXLAYtR8IlmgStY29ElIjge'
+      placeholder: 'Just Go Go.'
 deploy:
   provider: pages
   skip-cleanup: true
