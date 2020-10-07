@@ -5,9 +5,9 @@
 # Site
 title: blog
 subtitle: ''
-description: ''
-keywords:
-author: John Doe
+description: 'personal blog with Hexo'
+keywords: 'FE 前端 JavaScript HTML CSS React Vue Webpack babel React Native'
+author: TheFirstSunday
 language: en
 timezone: ''
 
@@ -98,7 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: insulin
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
