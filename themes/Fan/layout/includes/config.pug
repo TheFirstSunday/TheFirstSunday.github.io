@@ -1,0 +1,65 @@
+-
+  var algolia = 'undefined';
+  var env = process.env;
+  if (theme.algolia_search.enable) {
+    algolia = JSON.stringify({
+      appId: env.ALGOLIA_APP_ID || config.algolia.appId || config.algolia.applicationID,
+      apiKey: env.ALGOLIA_API_KEY || config.algolia.apiKey,
+      indexName: env.ALGOLIA_INDEX_NAME || config.algolia.indexName,
+      hits: theme.algolia_search.hits,
+      // search languages
+      languages: {
+        input_placeholder: _p("algolia_search.input_placeholder"),
+        hits_empty: _p("algolia_search.hits_empty"),
+        hits_stats: _p("algolia_search.hits_stats")
+      }
+    })
+  }
+
+  var localSearch = 'undefined';
+  if (theme.local_search && theme.local_search.enable) {
+    localSearch = JSON.stringify({
+      path: config.search.path,
+      languages: {
+        // search languages
+        hits_empty: _p("local_search.hits_empty")
+      }
+    })
+  }
+
+  if(theme.comments.enable){
+    var gitment = JSON.stringify({});
+    var valine = JSON.stringify({});
+
+    switch(theme.comments.type){
+      case "gitment":
+        gitment = JSON.stringify({
+          owner: config.comments.gitment.owner,
+          repo: config.comments.gitment.repo,
+          client_id: config.comments.gitment.client_id,
+          client_secret: config.comments.gitment.client_secret
+        });
+        break;
+      case "valine":
+        var obj={};
+        for(var key in config.comments.valine){
+          obj[key] = config.comments.valine[key];
+        }
+        valine = JSON.stringify(obj);
+        break;
+    }
+  }
+
+script.
+  window.GLOBAL_CONFIG = {
+    root: '!{config.root}',
+    algolia: !{algolia},
+    localSearch: !{localSearch},
+    copy: {
+      success: '!{_p("copy.success")}',
+      error: '!{_p("copy.error")}',
+      noSupport: '!{_p("copy.noSupport")}'
+    },
+    gitment: !{gitment},
+    valine: !{valine},
+  }
