@@ -104,3 +104,9 @@ theme: Fan
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+comments:
+  valine:
+    appId: 'EDiQLCtfYJFYtECr3Adwmncl-gzGzoHsz'
+    appKey: 'MDXLAYtR8IlmgStY29ElIjge'
+    placeholder: 'Just Go Go.'
