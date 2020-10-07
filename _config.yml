@@ -105,8 +105,15 @@ theme: Fan
 deploy:
   type: ''
 
+# comments
 comments:
   valine:
     appId: 'EDiQLCtfYJFYtECr3Adwmncl-gzGzoHsz'
     appKey: 'MDXLAYtR8IlmgStY29ElIjge'
     placeholder: 'Just Go Go.'
+
+# search
+algolia:
+  applicationID: 'V5C7R11NIT'
+  apiKey: '37d9271c02b1e0f2f42bd334f8f0de94'
+  indexName: 'blog'
