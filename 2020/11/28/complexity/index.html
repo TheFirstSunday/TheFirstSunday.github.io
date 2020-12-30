@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="时间与空间复杂度"><meta name="keywords" content="Diary"><meta name="author" content="TheFirstSunday,undefined"><meta name="copyright" content="TheFirstSunday"><title>时间与空间复杂度【前端-FE】</title><link rel="stylesheet" href="/css/fan.css"><link rel="stylesheet" href="/css/thirdparty/jquery.mCustomScrollbar.min.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch-theme-algolia.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4"></script><!-- link(rel="dns-prefetch" href="https://cdn.jsdelivr.net")--><!-- link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.css")--><!-- script(src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.js" defer)--><!-- script(src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")--><script src="/js/mathjax/mathjax.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+});
+</script><script>var isPassword = '' || false;
+if (isPassword) {
+    if (prompt('请输入文章密码') !== '') {
+        alert('密码错误！');
+        history.back();
+    }
+}</script><script>window.GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"V5C7R11NIT","apiKey":"37d9271c02b1e0f2f42bd334f8f0de94","indexName":"blog","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容:${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  gitment: {},
+  valine: {"appId":"EDiQLCtfYJFYtECr3Adwmncl-gzGzoHsz","appKey":"MDXLAYtR8IlmgStY29ElIjge","placeholder":"Just Go Go."},
+}</script><meta name="generator" content="Hexo 5.2.0"></head><body><canvas id="universe"></canvas><!--#body--><div id="sidebar"><div class="toggle-sidebar-info button-hover"><span data-toggle="文章目录">站点概览</span></div><div class="sidebar-toc"><div class="sidebar-toc-title">目录</div><div class="sidebar-toc-progress"><span class="progress-notice">您已阅读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc-progress-bar"></div></div><div class="sidebar-toc-content" id="sidebar-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">算法时间与空间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">什么是数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">什么是算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.3.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.4.</span> <span class="toc-text">空间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%B0%8F%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">空间复杂度小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4-VS-%E7%A9%BA%E9%97%B4"><span class="toc-number">1.6.</span> <span class="toc-text">时间 VS 空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">1.7.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info-avatar"><img class="author-info-avatar-img" src="/avatar.png"></div><div class="author-info-name">TheFirstSunday</div><div class="author-info-description">FE 前端 JavaScript HTML CSS React Vue Webpack Rollup babel React Native Flutter 小程序 算法</div><div class="links-buttons"><a class="links-button button-hover" href="https://github.com/TheFirstSunday" target="_blank">GitHub<i class="icon-dot bg-color5"></i></a><a class="links-button button-hover" href="mailto:zhaonan266366@163.com" target="_blank">Email<i class="icon-dot bg-color1"></i></a><a class="links-button button-hover" href="tencent://message/?uin=2621940203&amp;Site=&amp;Menu=yes" target="_blank">QQ<i class="icon-dot bg-color9"></i></a></div><div class="author-info-articles"><a class="author-info-articles-archives article-meta" href="/archives"><span class="pull-top">日志</span><span class="pull-bottom">6</span></a><a class="author-info-articles-tags article-meta" href="/tags"><span class="pull-top">标签</span><span class="pull-bottom">2</span></a><a class="author-info-articles-categories article-meta" href="/categories"><span class="pull-top">分类</span><span class="pull-bottom">1</span></a></div></div></div><div id="main-container"><header><div id="menu-outer"><i class="menu-list-icon fas fa-bars"></i><nav id="menu-inner"><a class="menu-item" href="/">首页</a><a class="menu-item" href="/tags">标签</a><a class="menu-item" href="/categories">分类</a><a class="menu-item" href="/archives">归档</a><a class="menu-item" href="/about">关于</a></nav><div class="right-info"><a class="search social-icon"><i class="fas fa-search"></i><span> 搜索</span></a><a class="title-name" href="/">前端-FE</a><span id="now-time"></span></div></div></header><div id="content-outer"><div id="content-inner"><article id="post"><div class="post-header"><div class="title">时间与空间复杂度</div><div class="container"><time class="button-hover post-date"><i class="fas fa-calendar-alt article-icon" aria-hidden="true"></i> 发表于 2020-11-28 | 更新于 2020-12-30</time><!--time.button-hover.post-date #[i.fas.fa-calendar-alt.article-icon(aria-hidden="true")] #[=__('post.modified')] #[=date(page['updated'], config.date_format)]--><div class="button-hover categories"><i class="fa fa-inbox article-icon" aria-hidden="true"></i><a class="link-a" href="/categories/Diary/">Diary</a></div><div class="button-hover tags"><i class="fa fa-tag article-icon" aria-hidden="true"></i><a class="link-a" href="/tags/Diary/">Diary</a></div></div></div><div class="main-content"><h2 id="算法时间与空间复杂度"><a href="#算法时间与空间复杂度" class="headerlink" title="算法时间与空间复杂度"></a>算法时间与空间复杂度</h2><p>算法、数据结构在我们的日常工作中还是很常见的，只要你细心观察，就会发现算可以体现在我们工作中的各个层面.<br>例如:</p>
+<ul>
+<li>浏览器的历史中的前进后退是不是可以把它看做一个线性的栈结构，history的pop、push对应这个栈的出栈、压栈.</li>
+<li>const obj = {}; let obj2 = {}; let a = 1; const a = 1; 用数据结构的思维也可以更好的理解ES6的特性。</li>
+</ul>
+<p>随着计算机行业发展，不管是前端亦或是后端，算法都是进阶的一个绊脚石，可以说不会算法永远也成不了一个合格<br>的高级工程师，想要进大厂确实要会些算法，但是它并不只是为了面试，它和我们的程序是息息相关的.</p>
+<h3 id="什么是数据结构"><a href="#什么是数据结构" class="headerlink" title="什么是数据结构"></a>什么是数据结构</h3><p>数据结构其实就是是程序存储组织数据的方式，一个数据结构是由程序中的数据元素按照某种逻辑关系组织起来的，是若干个数据元素的组合.</p>
+<p>数据结构是程序中处理数据的基本单位，在程序中作为一个整体来使用</p>
+<p>例如一个数字 1 或者一个字符 A，它是一种数据结构</p>
+<p>例如一个数组 [‘dog’, ‘cat’, ‘wolves’]，它是由字符串组合而成的数组，也是一种数据结构</p>
+<p>通俗来说，用一定格式组成的数据都是数据结构，我们比较常见的数据结构有字符串、数组、对象、堆、栈、链表、树、哈希表等等，你可能对着其中的一些数据结构并不了解，不要担心，你并不需要立刻知道它们都是什么，对于前端来说，我们使用 JavaScript 这个令我们又爱又恨的语言，它本身就存在的数据结构很少，那么对于像链表、树等等这些结构都是通过对象来模拟的，这点要先知道.</p>
+<p>在许多程序设计当中，数据结构的选择是一个基本的设计考虑因素，系统实现的困难程度和系统构造的质量都严重依赖于是否选择了最优的数据结构，选择最优的数据结构能够有效的提高运行的效率和节约存储空间的使用，但是要知道，没有十全十美的数据结构，每种数据结构都有局限性同样也有优点，要根据需求来选择合适的数据结构.</p>
+<h3 id="什么是算法"><a href="#什么是算法" class="headerlink" title="什么是算法"></a>什么是算法</h3><p>什么是算法，我们都知道 1+2+3=6，为什么等于 6 呢，你可能会说，1 加 2等于 3，两个 3 相加等于 6，这是小学生都会的数学常识，它就是广义上的算法</p>
+<p>算法其实就是解决一个问题的完整步骤描述，是指完成一个任务准确而完整的步骤描述</p>
+<p>算法的设计很多时候需要取决于数据结构，而算法的实现更依赖于采用的数据结构</p>
+<p>提出一个问题的算法是一个从抽象到具体的过程</p>
+<p>分析问题，选择数据结构，得出初步的解决方法</p>
+<p>将解决方法合理地拆分，整理成许多步骤</p>
+<p>为重复的步骤选择合理的循环变量</p>
+<p>使用易转化为程序实现的自然语言简练地描述算法</p>
+<p>了解了什么是算法之后，我们来看时间和空间复杂度，衡量不同算法之间的优劣我们通常从两个维度来考究</p>
+<ul>
+<li>时间维度：指执行代码所消耗的时间，即时间复杂度</li>
+<li>空间维度：指执行代码所消耗的空间，即空间复杂度</li>
+</ul>
+<p>接下来就开始逐步剖析时间和空间复杂度了，先说时间复杂度</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>在说时间复杂度之前，我们首先要理解一个概念即代码执行次数，也可称之为语句频度或时间频度，用 T(n) 表示</p>
+<p>我们用例子来一步一步阐述，首先我们来看函数 fn1</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;run&quot;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;end&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>我们来看这个函数中的语句会执行多少次</p>
+<p>很明显此函数内部只有两个语句，即 console.log(“run”) 和 console.log(“end”)，那么我们说这个函数体内代码执行次数是 2</p>
+<p>我们再来看函数 fn2</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;run&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>我们先来看函数 fn2 中有几条可执行语句</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">i &lt; n</span><br><span class="line">i++</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;run&quot;</span>)</span><br></pre></td></tr></table></figure></code></pre>
+<p>我们假设 n = 3，然后依次带入进去，看看各个执行语句执行了多少次<br>let i = 0 此条声明语句只在第一次 for 循环声明时执行 1 次<br>i &lt; n 此条语句执行次数根据形参 n 的大小变化，n = 3 时，即 i=0,i=1,i=2,i=3 时会执行，即此条语句执行次数为 n + 1 次<br>i++ 此条语句执行次数也是根据形参 n 的大小变化，n = 3 时，即 i=0,i=1,i=2 时会执行，即 n 次<br>console.log(“run”) 此条语句执行次数还是根据形参 n 的大小变化，n = 3 会执行 3 次，那么此语句在函数内部即会执行 n 次</p>
+<p>1 + (n + 1) + n + n = (3n + 2)</p>
+<p>那么函数 fn2 内共执行 3n + 2 次</p>
+<p>一段代码的总执行次数我们通常会用 T(n) 来表示，那么调用一次上面 fn1/fn2 两函数的总执行次数即</p>
+<p>T(n) = 2 // fn1<br>T(n) = 3n + 2 // fn2</p>
+<p>上面的 n，指的是为问题的规模，即输入数据的大小或者说数量，你也可以简单的理解为 T 就是函数本身，n 就是参数，也就是说</p>
+<p>函数 fn1 任何情况下执行次数都为 2</p>
+<p>函数 fn2 的总执行次数会根据 n 的大小变化而产生一个变化</p>
+<p>我们思考一下，我们可以使用一段代码的执行总次数来衡量执行速度吗？</p>
+<p>答案当然是不行的，当代码行数比较多的时候，我们一条一条的数来计算执行总次数太麻烦了，例如函数中套用函数时、循环中套用循环时，想要精确计算执行次数都是非常麻烦的</p>
+<p>所以，在算法中，我们一般用 T(n) 简化后的估算值来表达代码执行的速度，通常我们用大些字母 O 来表示，即大 O 表示法，由于是估算，它表示的是代码执行时间随数据规模增长的变化趋势，所以，也叫作渐进时间复杂度（asymptotic time complexity），简称时间复杂度</p>
+<p>明确了这个概念以后，我们就可以来算时间复杂度了，还是用上面 fn1/fn2 两函数例</p>
+<p>// fn1<br>T(n) = 2</p>
+<p>// fn2<br>T(n) = 3n + 2</p>
+<p>首先我们来看函数 fn1，它的执行总次数为 2，一个 常数(常数级)，也就是说此函数无论何时它的总执行次数都是 2，是一个不变的值，那么我们使用时间复杂度 O 来表示时直接估算为 1 就可以，即时间复杂度为 O(1)</p>
+<p>我们再来看函数 fn2 ，它的执行次数 T(n) 是 3n + 2 即 常数<em>n + 常数，这里我们完全可以看成 常数</em>n 和 +常数 两部分，随着 n 的增大，只有前一个部分会有变化，后面是不变的，所以在表示时间复杂度时就可以忽略后面不变的常数，即 常数<em>n，而 常数</em>n 中过的常数我们也可以直接当做 1，或者说忽略掉这个作为系数的常数，那么最终可以得出函数 fn2 的时间复杂度为 n，即 O(n)</p>
+<p>PS：晓得可能有人把数学知识还给老师了，所以解释下</p>
+<p>常数： 常数就是指平常的数值，可简单的理解为固定不变的数值</p>
+<p>系数： 系数指代数式的单项式中的数字因数，例如 a = 1<em>a则它的系数为1,2b=2</em>b ，则它的系数为 2</p>
+<p>我们再来举个例子，如下面这个多项式代指一个函数的 T(n)，求它的时间复杂度</p>
+<p>T(n) = 10n^4 + 100n^2 + 1000</p>
+<p>其实，对于多项式，我们只需要保留最高次项就行了，也就说，保留 n 的最高次方数就可以了，这个例子中保留的也就是 n 的 4 次方，系数和常数皆可以忽略，最终得到的时间复杂度即为 O(n^4)</p>
+<p>结论：</p>
+<p>T(n) 为常数时，时间复杂度为 O(1) ，反之时间复杂度为 O(保留T(n)的最高次项并去掉最高次项的系数)</p>
+<p>接下来，我们看几个例子来判断下几段代码的时间复杂度</p>
+<p>例1：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn01</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;你看这是啥&quot;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;这是一个输出&quot;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;哈哈哈&quot;</span>)</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>上面这个函数 fn01 中只有一条条的语句，共执行 5 次，毫无变化，时间复杂度即 O(1) ，此为常数级时间复杂度</p>
+<p>例2：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn02</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;这是一个输出🎓&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>如上，函数 fn02 同上文中的例子 fn2，一个循环，时间复杂度即为 O(n) ，此为线性级时间复杂度</p>
+<p>例3：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn03</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;外层循环&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;内层循环&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>这个题和上面就不太一样了，我们先单独看内部的循环，内部循环大概会执行 n 次，再来看外部循环又会执行 n 次，最终也就是 n * n = n^2，即函数 fn03 的时间复杂度为 O(n^2) ，此为平方级时间复杂度，如果是三层循环也就是时间复杂度为 O(n^3) 时，即立方级时间复杂度</p>
+<p>从这里我们就可以看出来，一段代码有多少层循环，时间复杂度就是 n 的多少次方，所以尽量避免多层循环嵌套</p>
+<p>例4：</p>
+<p>我们再来看下面这个函数 fn04</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn04</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;外层循环&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;内层循环&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;哈哈哈&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>此函数中有一个双循环，有一个单循环，即执行次数大概是 n^2 + n，根据我们上面说的保留最高次项，那么函数 fn04 的时间复杂度即为 O(n^2)</p>
+<p>例5：</p>
+<p>算法中肯定不只是上面那种寻常的循环，再来看下面这一个</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn05</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;外层循环&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = i; j &lt; n; j++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;内层循环&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>其实遇到这种，我们直接带入进去试一试即可知其规律</p>
+<p>当 i = 0 时，里层循环会执行 n 次</p>
+<p>当 i = 1 时，里层循环会执行 n - 1 次</p>
+<p>当 i = 2 时，里层循环会执行 n - 2 次</p>
+<p>当 i = 3 时，里层循环会执行 n - 3 次</p>
+<p>这个时候我们就发现了规律，每当 i 增加 1，里层循环就少执行 1 次，那么就简单了</p>
+<p>当 i = n - 2 时，里层循环会执行 2 次</p>
+<p>当 i = n - 1 时，里层循环会执行 1 次</p>
+<p>最终我们把 n 个里层循环的执行次数相加即可得出最终的一个不精确的总执行次数</p>
+<p>T(n) = n + (n - 1) + (n - 2) + … + 3 + 2 + 1</p>
+<p>如上，这是一个等差数列，嗯，晓得，会补充</p>
+<p>如果一个数列从第二项起，每一项与它的前一项的差等于同一个常数，这个数列就叫做等差数列，而这个常数叫做等差数列的公差，公差常用字母 d 表示</p>
+<p>例如：1,3,5,7,9……（2n-1) ，等差数列 S(n) 的通项公式为：S(n) = S1 + (n-1) * d，前 n 项和公式如下</p>
+<p>S(n) = n<em>S1 + n</em>(n - 1)*d/2</p>
+<p>// 或</p>
+<p>S(n) = n*(S1 + Sn)/2</p>
+<p>如此我们计算结果就成，我们上面的数列中，公差 d 为 -1，带入公式即可，第二个公式简单，用第二个好了，计算结果都是一样的</p>
+<p>// n*(S1 + Sn)/2</p>
+<p>n*(n + 1)/2 = (n^2 + n)/2 = (1/2)n^2 + (1/2)n</p>
+<p>最终我们得到了 (1/2)n^2 + (1/2)n ，按照上文中取最高次项去掉系数，即时间复杂度为 O(n^2)</p>
+<p>例6：</p>
+<p>再来看一个例子</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn06</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; n; i *= <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;run&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>还是老样子，如果你不晓得怎么看，可以先带入几个参数试一下，看一看规律</p>
+<p>我们可以分别使用 n=2, n=4, n=8, n=16，观察其循环中打印次数，当然你也可以直接运行一下代码，过程不过多阐述了，我们直接看结果</p>
+<p>n=2 时打印1次 T(n)=1<br>n=4 时打印2次 T(n)=2<br>n=8 时打印3次 T(n)=3<br>n=16 时打印4次 T(n)=4</p>
+<p>对于执行次数产生主要影像的就是循环语句中的 i*=2，每次循环 i 都会变成自身的两倍，仔细观察我们就可以得出这样一个规律性结果</p>
+<p>n=2 时打印1次 T(n)=1 // 2^1 = 2<br>n=4 时打印2次 T(n)=2 // 2^2 = 4<br>n=8 时打印3次 T(n)=3 // 2^3 = 8<br>n=16 时打印4次 T(n)=4 // 2^4 = 16</p>
+<p>根据上面的规律我们不难发现，那么2^执行次数=n，即 2^T(n)=n ，我们求 T(n)，调个就行了，也就是以 2 为底 n 的对数，即 T(n)=log_2 n</p>
+<p>PS：又来补数学了</p>
+<p>对数： 假如 a^n=b，即 a 的 n 次方等于 b，我们求 n 的值，那么这里为了方便表示就可以写成 log_a b，即以 a 为底 b 的对数，a 是底数，b 是真数，而 n 就是对数</p>
+<p>你可能会在纠结为什么只观察循环中的打印次数而不计算其所有的执行次数，原因上面也说过了，这些固有的常数及系数完全可以忽略，好吧，我们再最后推一遍</p>
+<p>中间输出为 log_2 n 次，let i = 1 只会执行一次，i&lt;n 会执行 log_2 n + 1 次，i*=2 也会执行 log_2 n 次，加起来就是 log_2 n + log_2 n + 1 + log_2 n，即 3log_2 n + 2，除去系数 3 和常数 2，我们得出了 log_2 n ，在时间复杂度的计算中 log 的底数也是可以省略的，所以最终函数 fn06 的时间复杂度为 O(log n) ，也就是对数级时间复杂度</p>
+<p>例7：</p>
+<p>最后在给大家来一个例子吧</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn07</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(j &lt; m)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;你看懂了吗&quot;</span>)</span><br><span class="line">        j = j * <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>如上图，此函数有两个参数，对应了里外两个循环，我们先从内部循环看起，眼熟吗？其实内部循环和上题函数 fn06 中的循环是一样的，只是一个用的 for ，一个用的 while，上题中的时间复杂度我们就不再叙述了，那么内层循环时间复杂度为 O(log n)</p>
+<p>我们再来看外层循环，也是上面解释过的，单看外层循环时间复杂度是 O(n)</p>
+<p>两个循环是嵌套关系，相乘就可以了，所以函数 fn07 的时间复杂度即为 O(n*log n) ，也就是线性对数级时间复杂度</p>
+<p>正如此函数输出，你看懂了吗？</p>
+<p>常见的时间复杂度量级有</p>
+<p>常数级 O(1)<br>对数级 O(log n)<br>线性级 O(n)<br>线性对数级 O(n*log n)<br>平方级 O(n^2)<br>立方级 O(n^3)<br>K次方级 O(n^k)<br>指数级 O(2^n)<br>上面从上到下依次时间复杂度越来越大，执行效率越来越低，大部分常用的在上面的图表中都有展示</p>
+<p>所以在程序或是刷题中，我们应该尽量使用低时间复杂度的方法</p>
+<p>时间复杂度就到此为止了，我们也列举了常见的时间复杂度，接下来我们来看看空间复杂度</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>空间复杂度其实就是对一个算法或者说一段代码在运行过程中占用存储空间大小表达方式</p>
+<p>我们上面讲过了时间复杂度，那么再来说空间复杂度会简单的很多</p>
+<p>空间复杂度也就是 S(n) ，它同样会用大O表示法来表示，我们直接上例子</p>
+<p>例1：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn001</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;空间复杂度&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>首先，我们知道，空间复杂度和存储空间有关，而存储空间是由什么决定的，肯定是声明的变量啊，我们直接来找函数 fn001 中的变量声明，只有一个 i ，也就是说此函数只有开辟了一块空间供 i 使用，那么空间复杂度 S(n) 即为 O(1) ，你可能会说 i 不是一直在变吗，是的它是在变，但是不管怎么变，它还是一个数字，占用空间大小都一致</p>
+<p>空间复杂度和时间复杂度一样，当代码里声明的变量是一个常量，不会根据传入值的变化而变化，那么也它的空间复杂度是 O(1)</p>
+<p>例2：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn002</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr = []</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        arr.push(n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<p>这个例子中我们声明了一个数组，我们知道数组中是可以存各种类型的，在循环中，我们根据 n 的大小向数组 arr 中 push 元素，所以，n 多大，数组就有多少元素，就占用了多少空间，所以空间复杂度S(n) = O(n)</p>
+<h3 id="空间复杂度小结"><a href="#空间复杂度小结" class="headerlink" title="空间复杂度小结"></a>空间复杂度小结</h3><p>空间复杂度里，只列出了两个例子，是因为一般情况下，我们用不到其他的，空间复杂度一般只会是 O(1)/O(n)/O(n^2)，其它的很少见，当然也有，我们在知道了时间复杂度再分析空间复杂度也很好分析，就不过多赘述了</p>
+<p>关于分析空间复杂度，其实我们直接从声明的变量入手就可以，看函数体内声明的变量根据传入值的变化而变化来分析</p>
+<p>另外，这里我们没有列举递归情况，请注意，递归就是函数套函数，像俄罗斯套娃一样的，这中间其实有一个问题，我们知道，递归函数，每层递归里都会开辟一个递归栈，每次递归产生的变量等空间消耗都会存在递归栈中，这也是一个空间，不管你有没有声明变量，只要递归了递归栈它都存在，也就是说只要存在递归的情况，基本上最少的空间复杂度也是 O(n) 了，所以我们尽可能的在能使用迭代的情况下就不使用递归</p>
+<h3 id="时间-VS-空间"><a href="#时间-VS-空间" class="headerlink" title="时间 VS 空间"></a>时间 VS 空间</h3><p>开头我们说了，评价一个算法的效率我们主要是从它的时间和空间两个维度看，但是，通常我们在算法中，时间和空间就是鱼和熊掌的关系，这时候可能一道算法题有两种解法，一种时间复杂度低，但空间复杂度稍高，另一种则反之</p>
+<p>这个时候怎么办呢？细品就知道了，在开发中，我们一般都是时间优于空间的，你想啊，一个程序，用户不会关心的占用了多少内存，但是他会关心你这个程序他在使用时的执行速度，况且，空间也就是磁盘，现阶段磁盘我们可以花钱扩容，时间上就没这么简单了，所以某些相对的情况下，空间换时间是可以令人接受的</p>
+<p>虽说空间换时间可行，但也不能一味的空间换时间，我们还是要尽可能降低两个维度的复杂度，少数对立情况下，可空间换时间</p>
+<p>我们在刷算法的时候，不是刷完了就完事了，我们还要去分析我们的题解对应的时间及空间复杂度，可以分析多种题解之间的复杂度，对比找出最优解</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50479555">https://zhuanlan.zhihu.com/p/50479555</a></p>
+</div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-meta">本文作者: </span><span class="post-copyright-info"><a href="mailto:undefined">TheFirstSunday</a></span></div><div class="post-copyright-type"><span class="post-copyright-meta">本文链接: </span><span class="post-copyright-info"><a href="https://thefirstsunday.github.io/2020/11/28/complexity/">https://thefirstsunday.github.io/2020/11/28/complexity/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://thefirstsunday.github.io">前端-FE</a>！</span></div></div><div class="post-copyright valine" id="comments-container"><script src="//unpkg.com/valine@1.4.14/dist/Valine.min.js"></script><script>let arr = location.href.split('/#more')[0].split('/');
+let title = arr[arr.length - 1];
+if (title === '') {
+    title = arr[arr.length - 2];
+}
+var flag = false;
+var gitFun = function () {
+    try {
+        var valineObj = window.GLOBAL_CONFIG.valine;
+        new Valine({
+            el: "#comments-container",
+            ...valineObj
+        });
+        flag = true;
+    } catch (e) {
+        flag = false;
+    }
+}
+var setIn = setInterval(() => {
+    if (!flag) {
+        gitFun();
+    } else {
+        clearInterval(setIn);
+    }
+}, 200);</script></div></article><div id="pagination"><div class="prev-post pull-left"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span><a href="/2020/12/30/message/"><i class="fas fa-angle-left">&nbsp;</i><span>四种跨浏览器选项卡实时通信方法</span></a></div><div class="next-post pull-right"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span><a href="/2020/10/07/git-emoji/"><span>git-emoji</span><span>&nbsp;</span><i class="fas fa-angle-right"></i></a></div></div><!--div!= paginator()--></div></div><div class="button-hover" id="return-top"><i class="fas fa-arrow-up" aria-hidden="true"></i></div><footer><div id="footer"><div class="button-hover" id="side-button"><i class="fas fa-arrow-right"></i></div><div class="right-content"><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fas fa-file-o"></i></span><span id="busuanzi_value_page_pv"></span><span></span></div><div class="copyright">&copy;2017 ～ 2020 By TheFirstSunday</div></div></div></footer></div><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery-3.3.1.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/velocity.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery.mCustomScrollbar.concat.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/fan.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/canvas_bg.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/utils.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/scroll.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/sidebar.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/copy.js"></script><!--script(src=url)--><div class="search-dialog"><div id="algolia-search-title">Algolia</div><div class="search-close-button"><i class="fa fa-times"></i></div><!--div#current-refined-values--><!--div#clear-all--><div id="search-box"></div><!--div#refinement-list--><hr><div id="hits"></div><div id="algolia-pagination"></div></div><div class="search-mask"></div><script src="/js/search/algolia.js"></script></body></html>
