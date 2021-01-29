@@ -1,6 +1,11 @@
-# 设计模式
-
 ---
+title: design patterns
+date: 2020-01-28 12:08:36
+categories: 'Diary'
+tags: design patterns
+---
+
+## 设计模式
 
 设计模式是软件设计中常见问题的典型解决方案。 每个模式就像一张蓝图， 你可以通过对其进行定制来解决代码中的特定设计问题。
 
